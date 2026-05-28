@@ -23,6 +23,11 @@ def create_app(test_config=None):
 
     os.makedirs(app.instance_path, exist_ok=True)
 
+    from . import blog
+
+    app.register_blueprint(blog.bp)
+    app.add_url_rule("/", endpoint="index")
+
     @app.route("/hello")
     def hello():
         return "Hello, World!"
